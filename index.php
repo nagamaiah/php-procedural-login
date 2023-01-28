@@ -17,16 +17,25 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
+            <div class="navbar-nav ml-auto">
                 <a class="nav-item nav-link" href="./dashboard.php">Dashboard</span></a>
                 <a class="nav-item nav-link" href="./login.php">Login</a>
                 <a class="nav-item nav-link" href="./register.php">Register</a>
-                <a class="nav-item nav-link" href="#">Log Out</a>
             </div>
         </div>
     </nav>
     <div class="container">
         <h3 class="text-center">Welcome to homepage</h3>
+        
+        <?php if(isset($_GET['message'])): ?>
+            <div class='alert alert-info' role='alert'>
+              <?= $_GET['message'] ;?>
+            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+            <span aria-hidden='true'>&times;</span>
+            </button>
+            </div>
+        <?php endif; ?>
+
         <p>Home Page content goes here...</p>
     </div>
 

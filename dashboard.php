@@ -1,3 +1,20 @@
+<?php
+session_start();
+include("./dbConnect.php");
+
+if(isset($_SESSION['user_id'])){
+  $user_id = $_SESSION['user_id'];
+  $result_array = mysqli_fetch_assoc(mysqli_query($mysqli_connection, "SELECT * FROM users where user_id='$user_id'"));
+  // dd($result_array['email']);
+  $email = $result_array['email'];
+} else {
+  $message = "Please login here...";
+  header('Location: ./login.php?message='.$message);
+}
+
+?>
+
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -8,26 +25,28 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Home Page</title>
+    <title>Dashboard</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-        <a class="navbar-brand" href="./">Home Page</a>
+        <a class="navbar-brand" href="./">Dashboard Page</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-item nav-link" href="./dashboard.php">Dashboard</span></a>
-                <a class="nav-item nav-link" href="./login.php">Login</a>
-                <a class="nav-item nav-link" href="./register.php">Register</a>
-                <a class="nav-item nav-link" href="#">Log Out</a>
+            <div class="navbar-nav ml-auto">
+                <?php if(isset($_SESSION['user_id'])): ?>
+                  <a class="nav-item nav-link" href="./logout.php">Log Out</a>
+                <?php else: ?>
+                  <a class="nav-item nav-link" href="./login.php">Login</a>
+                  <a class="nav-item nav-link" href="./register.php">Register</a>
+                <?php endif;?>
             </div>
         </div>
     </nav>
     <div class="container">
         <h3 class="text-center">Welcome to Dashboard Page</h3>
-        <p>Dashboard page content goes here...</p>
+        <p>Hi welcome, <?= $email; ?></p>
     </div>
 
     <!-- Optional JavaScript -->

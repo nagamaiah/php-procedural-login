@@ -3,11 +3,23 @@
 include("./config.php");
 
 try {
-    $mysqli = mysqli_connect(MYSQLHOST, USERNAME, PASSWORD, DATABASE);
+    $mysqli_connection = mysqli_connect(MYSQLHOST, USERNAME, PASSWORD, DATABASE);
+    // die(mysqli_error($mysqli_connection));
 } catch (\Throwable $th) {
     // echo "<pre>";
     // print_r($th);
     echo $th->getMessage()."<br> File -> ".$th->getFile()." <br> At Line -> ".$th->getLine();
+}
+
+function dd($data){
+    if (is_array($data) || is_object($data)) {
+        echo "<pre>";
+        var_dump($data);
+        die();
+    } else {
+        var_dump($data);
+        die();
+    }
 }
 
 // create table

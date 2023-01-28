@@ -8,26 +8,51 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Home Page</title>
+    <title>Register Page</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-        <a class="navbar-brand" href="./">Home Page</a>
+        <a class="navbar-brand" href="#">Register Page</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
+            <div class="navbar-nav ml-auto">
+                <a class="nav-item nav-link" href="./">Home</a>
                 <a class="nav-item nav-link" href="./dashboard.php">Dashboard</span></a>
                 <a class="nav-item nav-link" href="./login.php">Login</a>
                 <a class="nav-item nav-link" href="./register.php">Register</a>
-                <a class="nav-item nav-link" href="#">Log Out</a>
             </div>
         </div>
     </nav>
     <div class="container">
         <h3 class="text-center">Register Here...</h3>
-        <p>Register</p>
+
+        <?php if(isset($_GET['message'])): ?>
+            <div class='alert alert-info' role='alert'>
+              <?= $_GET['message'] ;?>
+            <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+            <span aria-hidden='true'>&times;</span>
+            </button>
+            </div>
+        <?php endif; ?>
+
+
+        <form action="./registerPost.php" method="POST" id="register">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" name="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" name="password" class="form-control" placeholder="Password">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Confirm Password</label>
+              <input type="password" name="confirm-password" class="form-control" placeholder="Confirm Password">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
     </div>
 
     <!-- Optional JavaScript -->
